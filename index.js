@@ -1,5 +1,5 @@
 // zapstack-auth/index.js
-import { jwtDecode } from "jwt-decode";
+const { jwtDecode } = require("jwt-decode");
 const ZapAuth = {
   init({ backendUrl, redirectUrl }) {
     this.backendUrl = backendUrl;
