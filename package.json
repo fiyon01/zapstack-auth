@@ -1,0 +1,24 @@
+{
+  "name": "zapstack-auth",
+  "version": "1.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fiyon01/zapstack-auth.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/fiyon01/zapstack-auth/issues"
+  },
+  "homepage": "https://github.com/fiyon01/zapstack-auth#readme",
+  "dependencies": {
+    "jwt-decode": "^4.0.0"
+  }
+}
