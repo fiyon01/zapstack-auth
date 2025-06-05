@@ -16,4 +16,4 @@ const ZapAuth = {
   },
 };
 
-export default ZapAuth;
+module.exports = ZapAuth;
