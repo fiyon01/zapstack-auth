@@ -1,29 +1,31 @@
 const { jwtDecode } = require("jwt-decode");
 
-class ZapAuth {
-  constructor() {
-    this.backendUrl = "";
-    this.redirectUrl = "";
-    this.zapKey = "";
-  }
+let config = {
+  backendUrl: "",
+  redirectUrl: "",
+  zapKey: "",
+};
 
+const ZapAuth = {
   init({ backendUrl, redirectUrl, zapKey }) {
-    this.backendUrl = backendUrl;
-    this.redirectUrl = redirectUrl;
-    this.zapKey = zapKey;
-  }
-
+    config.backendUrl = backendUrl;
+    config.redirectUrl = redirectUrl;
+    config.zapKey = zapKey;
+  },
   loginWithGoogle() {
-    window.location.href = `${this.backendUrl}/auth/google?zap_key=${this.zapKey}`;
-  }
-
+    const url = `${config.backendUrl}/auth/google?zap_key=${config.zapKey}`;
+    window.location.href = url;
+  },
   loginWithGithub() {
-    window.location.href = `${this.backendUrl}/auth/github?zap_key=${this.zapKey}`;
-  }
-
+    const url = `${config.backendUrl}/auth/github?zap_key=${config.zapKey}`;
+    window.location.href = url;
+  },
   decodeToken(token) {
     return jwtDecode(token);
-  }
-}
+  },
+};
 
-module.exports = new ZapAuth(); // export as singleton
+module.exports = ZapAuth;
+
+
+
