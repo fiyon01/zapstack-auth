@@ -142,8 +142,10 @@ const ZapAuth = (() => {
     }
 
     if (!token) {
-      throw new Error("No token found in URL");
+    console.warn("⚠️ No token found in URL, and none saved. Ignoring.");
+    return;
     }
+
 
     saveToken(token);
 
