@@ -122,26 +122,35 @@ const ZapAuth = (() => {
     }
   }
 
-  /**
+   /**
    * Handle OAuth callback:
-   * - extract token from URL query (?token=...)
-   * - save token and setup refresh
-   * - clean URL by removing token query param
+   * - Extract token from `?token=...` in URL (or provided search string)
+   * - Save token and setup refresh
+   * - Clean URL without reload
+   * 
+   * @param {string} [search] Optional query string like `?token=abc...` (e.g., from React Router's location.search)
    */
   function handleCallback(search) {
-  const query = search || window.location.search;
-  const urlParams = new URLSearchParams(query);
-  const token = urlParams.get("token");
+    const query = new URLSearchParams(search || window.location.search);
+    const token = query.get("token");
 
-  if (!token) {
-    throw new Error("No token found in URL");
+    // If token already exists in storage, assume it was already handled
+    const alreadySaved = getToken();
+    if (!token && alreadySaved) {
+      console.info("✅ Token already saved, skipping callback handling.");
+      return;
+    }
+
+    if (!token) {
+      throw new Error("No token found in URL");
+    }
+
+    saveToken(token);
+
+    // Clean up URL without reload (removes ?token=...)
+    window.history.replaceState({}, document.title, window.location.pathname);
   }
 
-  saveToken(token);
-
-  // Clean URL
-  window.history.replaceState({}, document.title, window.location.pathname);
-}
 
 
   return {
