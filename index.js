@@ -128,18 +128,21 @@ const ZapAuth = (() => {
    * - save token and setup refresh
    * - clean URL by removing token query param
    */
-  function handleCallback() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get("token");
-    if (!token) {
-      throw new Error("No token found in URL");
-    }
+  function handleCallback(search) {
+  const query = search || window.location.search;
+  const urlParams = new URLSearchParams(query);
+  const token = urlParams.get("token");
 
-    saveToken(token);
-
-    // Remove token query param from URL without reload
-    window.history.replaceState({}, document.title, window.location.pathname);
+  if (!token) {
+    throw new Error("No token found in URL");
   }
+
+  saveToken(token);
+
+  // Clean URL
+  window.history.replaceState({}, document.title, window.location.pathname);
+}
+
 
   return {
     startGoogle: (zapKey) => startOAuth("google", zapKey),
