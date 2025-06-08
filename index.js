@@ -2,7 +2,7 @@ import {jwtDecode} from "jwt-decode";
 
 const ZapAuth = (() => {
   const CLIENT_REDIRECT_URL = 'http://localhost:5173/oauth-callback'; // Change to your frontend URL
-  const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:4000'; // Your backend URL
+  const BACKEND_URL = 'http://localhost:4000'; // Your backend URL
 
   let refreshTimeoutId = null;
 
